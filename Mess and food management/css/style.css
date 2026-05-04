@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+}
+
+/* LOGIN */
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  border: 2px solid #333;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+/* HEADER */
+.header {
+  background: #1f2933;
+  color: white;
+  padding: 15px 30px;
+}
+
+.header nav a {
+  color: white;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+/* PAGE */
+.page {
+  padding: 30px;
+}
+
+.section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-left: 6px solid #1f2933;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #aaa;
+  padding: 10px;
+}
+
+/* STAR RATING */
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+  font-size: 22px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #ccc;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #f5b301;
+}
+
+/* ALTERNATE */
+.alternate-box {
+  margin-top: 15px;
+}
+
+.alternate-box select {
+  width: 100%;
+  padding: 8px;
+}
+
+/* BUTTON */
+.btn {
+  padding: 10px 20px;
+  background: #1f2933;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

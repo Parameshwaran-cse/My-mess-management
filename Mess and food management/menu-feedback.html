@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menu & Feedback</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <h2>Mess Menu & Feedback</h2>
+  <nav>
+    <a href="menu-feedback.html">Menu & Feedback</a>
+    <a href="mess-info.html">Mess Info</a>
+    <a href="index.html">Logout</a>
+  </nav>
+</header>
+
+<main class="page">
+
+<!-- ================= BREAKFAST ================= -->
+<section class="section">
+  <h3>Breakfast</h3>
+
+  <table class="rating-table">
+    <tr><th>Food Item</th><th>Rating</th></tr>
+
+    <tr>
+      <td>Idli</td>
+      <td>
+        <div class="star-rating">
+          <input type="radio" id="b-idli5" name="b-idli"><label for="b-idli5">★</label>
+          <input type="radio" id="b-idli4" name="b-idli"><label for="b-idli4">★</label>
+          <input type="radio" id="b-idli3" name="b-idli"><label for="b-idli3">★</label>
+          <input type="radio" id="b-idli2" name="b-idli"><label for="b-idli2">★</label>
+          <input type="radio" id="b-idli1" name="b-idli"><label for="b-idli1">★</label>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Dosa</td>
+      <td>
+        <div class="star-rating">
+          <input type="radio" id="b-dosa5" name="b-dosa"><label for="b-dosa5">★</label>
+          <input type="radio" id="b-dosa4" name="b-dosa"><label for="b-dosa4">★</label>
+          <input type="radio" id="b-dosa3" name="b-dosa"><label for="b-dosa3">★</label>
+          <input type="radio" id="b-dosa2" name="b-dosa"><label for="b-dosa2">★</label>
+          <input type="radio" id="b-dosa1" name="b-dosa"><label for="b-dosa1">★</label>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="alternate-box">
+    <label>Alternate dish for least-rated breakfast item</label>
+    <select>
+      <option>Select alternate</option>
+      <option>Pongal</option>
+      <option>Upma</option>
+      <option>Rava Dosa</option>
+    </select>
+  </div>
+</section>
+
+<!-- ================= LUNCH ================= -->
+<section class="section">
+  <h3>Lunch</h3>
+
+  <table class="rating-table">
+    <tr><th>Food Item</th><th>Rating</th></tr>
+
+    <tr>
+      <td>Sambar</td>
+      <td>
+        <div class="star-rating">
+          <input type="radio" id="l-sambar5" name="l-sambar"><label for="l-sambar5">★</label>
+          <input type="radio" id="l-sambar4" name="l-sambar"><label for="l-sambar4">★</label>
+          <input type="radio" id="l-sambar3" name="l-sambar"><label for="l-sambar3">★</label>
+          <input type="radio" id="l-sambar2" name="l-sambar"><label for="l-sambar2">★</label>
+          <input type="radio" id="l-sambar1" name="l-sambar"><label for="l-sambar1">★</label>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="alternate-box">
+    <label>Alternate dish for least-rated lunch item</label>
+    <select>
+      <option>Select alternate</option>
+      <option>Dal Fry</option>
+      <option>Kootu</option>
+      <option>Veg Kurma</option>
+    </select>
+  </div>
+</section>
+
+<!-- ================= DINNER (FIXED) ================= -->
+<section class="section">
+  <h3>Dinner</h3>
+
+  <table class="rating-table">
+    <tr><th>Food Item</th><th>Rating</th></tr>
+
+    <tr>
+      <td>Chapati</td>
+      <td>
+        <div class="star-rating">
+          <input type="radio" id="d-chapati5" name="d-chapati"><label for="d-chapati5">★</label>
+          <input type="radio" id="d-chapati4" name="d-chapati"><label for="d-chapati4">★</label>
+          <input type="radio" id="d-chapati3" name="d-chapati"><label for="d-chapati3">★</label>
+          <input type="radio" id="d-chapati2" name="d-chapati"><label for="d-chapati2">★</label>
+          <input type="radio" id="d-chapati1" name="d-chapati"><label for="d-chapati1">★</label>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- ✅ DINNER ALTERNATE (THIS WAS MISSING EARLIER) -->
+  <div class="alternate-box">
+    <label>Alternate dish for least-rated dinner item</label>
+    <select>
+      <option>Select alternate</option>
+      <option>Veg Stew</option>
+      <option>Paneer Curry</option>
+      <option>Channa Masala</option>
+      <option>Mixed Veg Gravy</option>
+    </select>
+  </div>
+</section>
+
+<button class="btn">Submit Feedback</button>
+
+</main>
+
+</body>
+</html>
