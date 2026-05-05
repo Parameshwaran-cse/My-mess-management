@@ -17,8 +17,12 @@ function Login() {
     setError('');
     setLoading(true);
     try {
-      await login(username, password);
-      navigate('/dashboard');
+      const response = await login(username, password);
+      if (response.data?.user?.role === 'ADMIN') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {

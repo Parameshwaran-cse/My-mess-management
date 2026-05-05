@@ -43,7 +43,7 @@ function Stars({ count, total = 5 }) {
 function Dashboard() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('lunch');
-  const username = user?.username || 'John';
+  const displayName = user?.fullName || user?.username || 'Guest';
 
 
 
@@ -52,7 +52,7 @@ function Dashboard() {
       {/* Top */}
       <div className="dash-top">
         <div>
-          <div className="welcome-badge">Welcome back, {username.toUpperCase()}</div>
+          <div className="welcome-badge">Welcome back, {displayName.toUpperCase()}</div>
           <h1 className="dash-title">Your Mess<br /><span>Dashboard</span></h1>
           <p className="dash-subtitle">Track and rate your daily mess meals and give feedback<br />to help improve the menu in one place.</p>
         </div>

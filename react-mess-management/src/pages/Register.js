@@ -6,6 +6,9 @@ function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
   const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -18,7 +21,7 @@ function Register() {
     if (password.length < 6) { setError('Password must be at least 6 characters'); return; }
     setLoading(true);
     try {
-      await api.auth.register(username, password, role);
+      await api.auth.register(username, password, email, fullName, phone, role);
       navigate('/', { state: { message: 'Registration successful! Please login.' } });
     } catch (err) {
       setError(err.message || 'Registration failed. Username may already exist.');
@@ -43,6 +46,15 @@ function Register() {
         <form onSubmit={handleRegister}>
           <label className="auth-label">Username</label>
           <input className="auth-input" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Choose a username" required minLength="3" disabled={loading} />
+
+          <label className="auth-label" style={{ marginTop: 16 }}>Email</label>
+          <input className="auth-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter email address" required disabled={loading} />
+
+          <label className="auth-label" style={{ marginTop: 16 }}>Full Name</label>
+          <input className="auth-input" type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Enter full name" required disabled={loading} />
+
+          <label className="auth-label" style={{ marginTop: 16 }}>Phone</label>
+          <input className="auth-input" type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="10-digit phone number" required pattern="[0-9]{10}" disabled={loading} />
 
           <label className="auth-label" style={{ marginTop: 16 }}>Password</label>
           <input className="auth-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Min 6 characters" required minLength="6" disabled={loading} />

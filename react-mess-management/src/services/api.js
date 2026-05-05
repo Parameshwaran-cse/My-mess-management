@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 const getAuthHeader = () => {
   const token = localStorage.getItem('token');
@@ -23,11 +23,31 @@ export const api = {
       });
       return handleResponse(response);
     },
-    register: async (username, password, role) => {
+    register: async (username, password, email, fullName, phone, role) => {
       const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, role })
+        body: JSON.stringify({ 
+          username, 
+          password, 
+          email, 
+          fullName, 
+          phone, 
+          role: role.toUpperCase() 
+        })
+      });
+      return handleResponse(response);
+    }
+  },
+  users: {
+    updateProfile: async (userData) => {
+      const response = await fetch(`${API_URL}/users/me`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeader()
+        },
+        body: JSON.stringify(userData)
       });
       return handleResponse(response);
     }
@@ -69,6 +89,38 @@ export const api = {
     },
     getUserFeedback: async () => {
       const response = await fetch(`${API_URL}/feedback/user`, {
+        headers: getAuthHeader()
+      });
+      return handleResponse(response);
+    }
+  },
+  admin: {
+    getDashboard: async () => {
+      const response = await fetch(`${API_URL}/admin/dashboard`, { headers: getAuthHeader() });
+      return handleResponse(response);
+    },
+    getUsers: async () => {
+      const response = await fetch(`${API_URL}/admin/users`, { headers: getAuthHeader() });
+      return handleResponse(response);
+    },
+    getAllFeedback: async () => {
+      const response = await fetch(`${API_URL}/admin/feedback`, { headers: getAuthHeader() });
+      return handleResponse(response);
+    },
+    getAllBookings: async () => {
+      const response = await fetch(`${API_URL}/admin/bookings`, { headers: getAuthHeader() });
+      return handleResponse(response);
+    },
+    changeRole: async (id, role) => {
+      const response = await fetch(`${API_URL}/admin/users/${id}/role?role=${role}`, {
+        method: 'PUT',
+        headers: getAuthHeader()
+      });
+      return handleResponse(response);
+    },
+    deleteUser: async (id) => {
+      const response = await fetch(`${API_URL}/admin/users/${id}`, {
+        method: 'DELETE',
         headers: getAuthHeader()
       });
       return handleResponse(response);

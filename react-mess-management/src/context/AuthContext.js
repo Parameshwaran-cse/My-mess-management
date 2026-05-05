@@ -11,20 +11,30 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
-    if (token && userData) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(userData));
+    if (token && userData && userData !== 'undefined') {
+      try {
+        setIsAuthenticated(true);
+        setUser(JSON.parse(userData));
+      } catch (error) {
+        console.error('Failed to parse user data:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
     setLoading(false);
   }, []);
 
   const login = async (username, password) => {
-    const data = await api.auth.login(username, password);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    const response = await api.auth.login(username, password);
+    const { token, user } = response.data;
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
     setIsAuthenticated(true);
-    setUser(data.user);
-    return data;
+    setUser(user);
+    return response;
   };
 
   const logout = () => {
@@ -35,7 +45,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading, setUser }}>
       {children}
     </AuthContext.Provider>
   );

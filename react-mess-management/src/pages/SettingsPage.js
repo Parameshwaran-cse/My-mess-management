@@ -1,18 +1,31 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { api } from '../services/api';
 
 function SettingsPage() {
 
+  const { user, setUser } = useAuth();
   const [profileOpen, setProfileOpen] = useState(true);
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('john.doe@example.com');
+  const [name, setName] = useState(user?.fullName || '');
+  const [email, setEmail] = useState(user?.email || '');
+  const [role, setRole] = useState(user?.role || 'STUDENT');
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+  const handleSave = async () => {
+    setError('');
+    try {
+      const response = await api.users.updateProfile({ fullName: name, email });
+      // Update global context
+      setUser(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (err) {
+      setError(err.message || 'Failed to update profile');
+    }
   };
 
   return (
@@ -47,9 +60,9 @@ function SettingsPage() {
               </div>
               <div className="form-field">
                 <label className="form-label">Role</label>
-                <select className="form-select">
-                  <option>Student</option>
-                  <option>Admin</option>
+                <select className="form-select" value={role} disabled>
+                  <option value="STUDENT">Student</option>
+                  <option value="ADMIN">Admin</option>
                 </select>
               </div>
             </div>

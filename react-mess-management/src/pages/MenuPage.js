@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const MENU_DATA = {
   breakfast: [
@@ -28,6 +29,8 @@ function Stars({ count, total = 5 }) {
 function MenuPage() {
   const [activeTab, setActiveTab] = useState('lunch');
   const [items, setItems] = useState(MENU_DATA);
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'ADMIN';
 
   const handleDelete = (id) => {
     setItems(prev => ({
@@ -40,10 +43,10 @@ function MenuPage() {
     <div className="menu-page">
       <div className="page-header">
         <div>
-          <h1 className="page-title">Manage Menu</h1>
-          <p className="page-subtitle">View and edit daily meal menus for breakfast, lunch, and dinner.</p>
+          <h1 className="page-title">{isAdmin ? 'Manage Menu' : 'Today\'s Menu'}</h1>
+          <p className="page-subtitle">View and {isAdmin ? 'edit' : 'explore'} daily meal menus for breakfast, lunch, and dinner.</p>
         </div>
-        <button className="edit-btn">🍳 Edit Menu &nbsp;›</button>
+        {isAdmin && <button className="edit-btn">🍳 Edit Menu &nbsp;›</button>}
       </div>
 
       <div className="tab-bar">
@@ -83,16 +86,20 @@ function MenuPage() {
               </div>
               <div className="menu-food-score">{item.score}</div>
             </div>
-            <div className="menu-actions">
-              <button className="action-btn edit" title="Edit">✏</button>
-              <button className="action-btn del" title="Delete" onClick={() => handleDelete(item.id)}>🗑</button>
-            </div>
+            {isAdmin && (
+              <div className="menu-actions">
+                <button className="action-btn edit" title="Edit">✏</button>
+                <button className="action-btn del" title="Delete" onClick={() => handleDelete(item.id)}>🗑</button>
+              </div>
+            )}
           </div>
         ))}
 
-        <div className="add-item-row">
-          + Add Food Item
-        </div>
+        {isAdmin && (
+          <div className="add-item-row">
+            + Add Food Item
+          </div>
+        )}
       </div>
     </div>
   );
